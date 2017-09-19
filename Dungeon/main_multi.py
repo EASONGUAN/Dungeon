@@ -77,18 +77,18 @@ def main():
         key_pressed = pygame.key.get_pressed()
         if key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
-            the_server.send("up".encode('ascii'))
+            the_server.send("U".encode('ascii'))
         if key_pressed[K_DOWN] or key_pressed[K_s]:
             my_hero.movedown()
-            the_server.send("down".encode('ascii'))
+            the_server.send("D".encode('ascii'))
         if key_pressed[K_LEFT] or key_pressed[K_a]:
             my_hero.moveleft()
-            the_server.send("left".encode('ascii'))
+            the_server.send("L".encode('ascii'))
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
-            the_server.send("right".encode('ascii'))
+            the_server.send("R".encode('ascii'))
         else:
-            the_server.send("NULL".encode('ascii'))
+            the_server.send("S".encode('ascii'))
 
 
         screen.blit(background, (0, 0))

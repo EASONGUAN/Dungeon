@@ -78,6 +78,8 @@ def main():
     delay = 100
     my_hero = hero.Hero((70, 70), bg_size[0], bg_size[1])
 
+    hero2 = hero.Hero((45, 45), bg_size[0], bg_size[1])
+
     soldier_one = soldier.SoldierTypeOne((90, 90), bg_size[0], bg_size[1])
     soldier_two = soldier.SoldierTypeOne((180, 180), bg_size[0], bg_size[1])
     soldier_three = soldier.SoldierTypeOne((300, 300), bg_size[0], bg_size[1])
@@ -100,30 +102,45 @@ def main():
         key_pressed = pygame.key.get_pressed()
         if key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
-            the_server.send("upppp".encode('ascii'))
+            the_server.send("U".encode('ascii'))
         if key_pressed[K_DOWN] or key_pressed[K_s]:
             my_hero.movedown()
-            the_server.send("downn".encode('ascii'))
+            the_server.send("D".encode('ascii'))
         if key_pressed[K_LEFT] or key_pressed[K_a]:
             my_hero.moveleft()
-            the_server.send("leftt".encode('ascii'))
+            the_server.send("L".encode('ascii'))
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
-            the_server.send("right".encode('ascii'))
+            the_server.send("R".encode('ascii'))
         else:
-            the_server.send("NULL".encode('ascii'))
+            the_server.send("S".encode('ascii'))
 
 
         screen.blit(background, (0, 0))
+
+        receive = the_server.recv(1024).decode('ascii')
+        print(receive)
+        if "DR" in receive:
+            hero2.moveright()
+            hero2.movedown()
+        elif "UR" in receive:
+            hero2.moveright()
+            hero2.moveup()
+        elif "DL" in receive:
+            hero2.moveleft()
+            hero2.movedown()
+        elif "UL" in receive:
+            hero2.moveleft()
+            hero2.moveup()
+
+        screen.blit(hero2.init_image, hero2.rect)
+
         if my_hero.active:
             screen.blit(my_hero.init_image, my_hero.rect)
 
         for sol in soldier_list:
             screen.blit(sol.init_image, sol.rect)
             sol.move()
-
-        receive = the_server.recv(1024)
-        print(receive.decode('ascii'))
 
 
         clock.tick(fps)

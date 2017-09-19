@@ -27,6 +27,7 @@ while True:
     msg = clientsocket1.recv(1024)
     msg2 = clientsocket2.recv(1024)
 
+
     clientsocket2.send(msg)
     clientsocket1.send(msg2)
 
