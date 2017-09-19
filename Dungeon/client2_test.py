@@ -56,6 +56,7 @@ def connect():
 
     # create a socket object
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
 
     # get local machine name
     host = socket.gethostname()

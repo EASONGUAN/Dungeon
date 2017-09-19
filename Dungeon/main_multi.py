@@ -5,6 +5,7 @@ import hero
 import world
 import soldier
 import socket
+import time
 
 from pygame.locals import *
 from random import *
@@ -30,10 +31,31 @@ soldier_speed = 4
 soldier_width = 100
 soldier_height = 100
 
+
+def text_objects(text, font):
+    text_surface = font.render(text, True, BLACK)
+    return text_surface, text_surface.get_rect()
+
+
+def message(text):
+    large_text = pygame.font.Font("freesansbold.ttf", 115)
+    text_surf, text_rect = text_objects(text, large_text)
+    text_rect.center = ((width / 2), (height / 2))
+    screen.blit(text_surf, text_rect)
+    pygame.display.update()
+
+    time.sleep(2)
+
+
+def wait_connect():
+    message("Waiting")
+
+
 def connect():
 
     # create a socket object
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
 
     # get local machine name
     host = socket.gethostname()
@@ -44,11 +66,7 @@ def connect():
     sock.connect((host, port))
 
     # Receive no more than 1024 bytes
-    #msg = sock.recv(1024)
 
-    #s.close()
-
-    #print(msg.decode('ascii'))
     return sock
 
 
@@ -65,6 +83,18 @@ def main():
     playing = True
 
     the_server = connect()
+
+    while True:
+        try:
+            the_server.recv(4096)
+        except socket.error:
+            screen.fill(WHITE)
+            wait_connect()
+            pygame.display.update()
+            print('aaaaa')
+            pass
+        else:
+            break
 
     while playing:
         fps = 60
@@ -90,8 +120,8 @@ def main():
         else:
             the_server.send("S".encode('ascii'))
 
-
         screen.blit(background, (0, 0))
+
         if my_hero.active:
             screen.blit(my_hero.init_image, my_hero.rect)
 
@@ -101,7 +131,6 @@ def main():
 
         receive = the_server.recv(1024)
         print(receive.decode('ascii'))
-
 
         clock.tick(fps)
         pygame.display.flip()
