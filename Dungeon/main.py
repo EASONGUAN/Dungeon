@@ -29,7 +29,7 @@ soldier_speed = 4
 soldier_width = 100
 soldier_height = 100
 
-
+movement = []
 def main():
     delay = 100
     my_hero = hero.Hero((45, 45), bg_size[0], bg_size[1])
@@ -41,7 +41,7 @@ def main():
     soldier_list = [soldier_one, soldier_two, soldier_three]
 
     playing = True
-
+    movement = []
     while playing:
         fps = 60
         clock = pygame.time.Clock()
@@ -53,12 +53,16 @@ def main():
         key_pressed = pygame.key.get_pressed()
         if key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
+            movement.append("U")
         if key_pressed[K_DOWN] or key_pressed[K_s]:
             my_hero.movedown()
+            movement.append("D")
         if key_pressed[K_LEFT] or key_pressed[K_a]:
             my_hero.moveleft()
+            movement.append("L")
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
+            movement.append("R")
 
         screen.blit(background, (0, 0))
         if my_hero.active:
@@ -67,6 +71,9 @@ def main():
         for sol in soldier_list:
             screen.blit(sol.init_image, sol.rect)
             sol.move()
+
+        print(movement)
+        movement = []
 
 
         clock.tick(fps)
@@ -79,6 +86,7 @@ if __name__ == '__main__':
     except SystemExit:
         pass
     except:
+        print(movement)
         traceback.print_exc()
         pygame.quit()
         input()

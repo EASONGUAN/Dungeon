@@ -2,7 +2,7 @@ import socket
 
 # create a socket object
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-serversocket.settimeout(0.00001)
+serversocket.settimeout(0.00000000000000000001)
 
 # get local machine name
 host = socket.gethostname()
@@ -38,7 +38,7 @@ while True:
 
     else:
         socket_list.append(newclient)
-        print(socket_list)
+        #print(socket_list)
         added = False
         for pair in pairs:
             if not pair[1]:
@@ -51,16 +51,16 @@ while True:
             pairs.append([newclient, None])
 
     for pair in pairs:
-        print(pairs)
+        #print(pairs)
         if pair[1] != None:
             player1 = pair[0]
             player2 = pair[1]
-            msg = player1.recv(1024)
-            msg2 = player2.recv(1024)
+            msg = player1.recv(512)
+            msg2 = player2.recv(512)
             print(msg.decode('ascii'))
             print(msg2.decode('ascii'))
             player2.send(msg)
             player1.send(msg2)
-        print('ggggg')
+        #print('ggggg')
 
     #clientsocket.close()

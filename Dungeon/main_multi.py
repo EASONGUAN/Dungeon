@@ -55,7 +55,7 @@ def connect():
 
     # create a socket object
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
+    sock.settimeout(2)
 
     # get local machine name
     host = socket.gethostname()
@@ -129,8 +129,8 @@ def main():
             screen.blit(sol.init_image, sol.rect)
             sol.move()
 
-        receive = the_server.recv(1024)
-        print(receive.decode('ascii'))
+        receive = the_server.recv(512)
+        #print(receive.decode('ascii'))
 
         clock.tick(fps)
         pygame.display.flip()

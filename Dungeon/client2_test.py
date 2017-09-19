@@ -56,7 +56,7 @@ def connect():
 
     # create a socket object
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
+    sock.settimeout(2)
 
     # get local machine name
     host = socket.gethostname()
@@ -119,20 +119,44 @@ def main():
 
         screen.blit(background, (0, 0))
 
-        receive = the_server.recv(1024).decode('ascii')
-        print(receive)
+        receive = the_server.recv(512).decode('ascii')
+        #print(receive)
         if "DR" in receive:
-            hero2.moveright()
-            hero2.movedown()
+            if"DRDR" in receive:
+                hero2.moveright()
+                hero2.movedown()
+                hero2.moveright()
+                hero2.movedown()
+            else:
+                hero2.moveright()
+                hero2.movedown()
         elif "UR" in receive:
-            hero2.moveright()
-            hero2.moveup()
+            if "URUR" in receive:
+                hero2.moveright()
+                hero2.moveup()
+                hero2.moveright()
+                hero2.moveup()
+            else:
+                hero2.moveright()
+                hero2.moveup()
         elif "DL" in receive:
-            hero2.moveleft()
-            hero2.movedown()
+            if "DLDL" in receive:
+                hero2.moveleft()
+                hero2.movedown()
+                hero2.moveleft()
+                hero2.movedown()
+            else:
+                hero2.moveleft()
+                hero2.movedown()
         elif "UL" in receive:
-            hero2.moveleft()
-            hero2.moveup()
+            if "ULUL" in receive:
+                hero2.moveleft()
+                hero2.moveup()
+                hero2.moveleft()
+                hero2.moveup()
+            else:
+                hero2.moveleft()
+                hero2.moveup()
 
         screen.blit(hero2.init_image, hero2.rect)
 
