@@ -1,4 +1,5 @@
 import pygame
+import time
 
 class SoldierTypeOne(pygame.sprite.Sprite):
     def __init__(self, position, width, height):

@@ -53,10 +53,12 @@ def main():
         key_pressed = pygame.key.get_pressed()
         if key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
+            print("aaaaaaaaaaaaaaaaaaaaaa")
         if key_pressed[K_DOWN] or key_pressed[K_s]:
             my_hero.movedown()
         if key_pressed[K_LEFT] or key_pressed[K_a]:
             my_hero.moveleft()
+            print("bbbbbbbbbbbbbbbbbbbbbbbbb")
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
 
