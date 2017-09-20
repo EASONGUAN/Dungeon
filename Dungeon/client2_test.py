@@ -91,6 +91,7 @@ def main():
     playing = True
 
     the_server = connect()
+    the_server.recv(4096)
 
 
     while playing:

@@ -45,7 +45,7 @@ while True:
                 pair[1] = newclient
                 added = True
                 pair[0].send('Paired!'.encode('ascii'))
-                #pair[1].send('Paired!'.encode('ascii'))
+                pair[1].send('Paired!'.encode('ascii'))
                 break
         if not added:
             pairs.append([newclient, None])
