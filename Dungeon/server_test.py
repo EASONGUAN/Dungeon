@@ -45,7 +45,7 @@ while True:
                 pair[1] = newclient
                 added = True
                 pair[0].send('Paired!'.encode('ascii'))
-                pair[1].send('Paired!'.encode('ascii'))
+                #pair[1].send('Paired!'.encode('ascii'))
                 break
         if not added:
             pairs.append([newclient, None])
@@ -55,10 +55,8 @@ while True:
         if pair[1] != None:
             player1 = pair[0]
             player2 = pair[1]
-            msg = player1.recv(512)
-            msg2 = player2.recv(512)
-            print(msg.decode('ascii'))
-            print(msg2.decode('ascii'))
+            msg = player1.recv(4096)
+            msg2 = player2.recv(4096)
             player2.send(msg)
             player1.send(msg2)
         #print('ggggg')

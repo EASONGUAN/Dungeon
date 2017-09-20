@@ -6,6 +6,7 @@ import world
 import soldier
 import socket
 import time
+import pickle
 
 from pygame.locals import *
 from random import *
@@ -96,6 +97,8 @@ def main():
         else:
             break
 
+    movement = []
+
     while playing:
         fps = 60
         clock = pygame.time.Clock()
@@ -107,18 +110,23 @@ def main():
         key_pressed = pygame.key.get_pressed()
         if key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
-            the_server.send("U".encode('ascii'))
+            movement.append("U")
         if key_pressed[K_DOWN] or key_pressed[K_s]:
             my_hero.movedown()
-            the_server.send("D".encode('ascii'))
+            movement.append("D")
         if key_pressed[K_LEFT] or key_pressed[K_a]:
             my_hero.moveleft()
-            the_server.send("L".encode('ascii'))
+            movement.append("L")
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
-            the_server.send("R".encode('ascii'))
+            movement.append("R")
         else:
-            the_server.send("S".encode('ascii'))
+            movement.append("S")
+
+        data = pickle.dumps(movement)
+        the_server.send(data)
+
+        movement = []
 
         screen.blit(background, (0, 0))
 

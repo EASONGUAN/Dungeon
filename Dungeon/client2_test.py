@@ -27,6 +27,7 @@ import hero
 import world
 import soldier
 import socket
+import pickle
 
 from pygame.locals import *
 from random import *
@@ -119,44 +120,18 @@ def main():
 
         screen.blit(background, (0, 0))
 
-        receive = the_server.recv(512).decode('ascii')
-        #print(receive)
-        if "DR" in receive:
-            if"DRDR" in receive:
-                hero2.moveright()
-                hero2.movedown()
-                hero2.moveright()
-                hero2.movedown()
-            else:
-                hero2.moveright()
-                hero2.movedown()
-        elif "UR" in receive:
-            if "URUR" in receive:
-                hero2.moveright()
+        receive = the_server.recv(4096)
+        data = pickle.loads(receive)
+
+        for move in data:
+            if move == "U":
                 hero2.moveup()
+            if move == "R":
                 hero2.moveright()
-                hero2.moveup()
-            else:
-                hero2.moveright()
-                hero2.moveup()
-        elif "DL" in receive:
-            if "DLDL" in receive:
+            if move == "L":
                 hero2.moveleft()
+            if move == "D":
                 hero2.movedown()
-                hero2.moveleft()
-                hero2.movedown()
-            else:
-                hero2.moveleft()
-                hero2.movedown()
-        elif "UL" in receive:
-            if "ULUL" in receive:
-                hero2.moveleft()
-                hero2.moveup()
-                hero2.moveleft()
-                hero2.moveup()
-            else:
-                hero2.moveleft()
-                hero2.moveup()
 
         screen.blit(hero2.init_image, hero2.rect)
 
