@@ -133,15 +133,20 @@ def main():
                 hero2.moveleft()
             if move == "D":
                 hero2.movedown()
+            if move == "M":
+                for sol in soldier_list:
+                    screen.blit(sol.init_image, sol.rect)
+                    sol.move()
 
         screen.blit(hero2.init_image, hero2.rect)
 
         if my_hero.active:
             screen.blit(my_hero.init_image, my_hero.rect)
-
+        '''
         for sol in soldier_list:
             screen.blit(sol.init_image, sol.rect)
             sol.move()
+        '''
 
 
         clock.tick(fps)

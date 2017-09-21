@@ -123,6 +123,7 @@ def main():
         else:
             movement.append("S")
 
+        movement.append("M")
         data = pickle.dumps(movement)
         the_server.send(data)
 
@@ -138,7 +139,7 @@ def main():
             sol.move()
 
         receive = the_server.recv(512)
-        #print(receive.decode('ascii'))
+        print(receive.decode('ascii'))
 
         clock.tick(fps)
         pygame.display.flip()
