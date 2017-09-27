@@ -6,8 +6,8 @@ class Hero(pygame.sprite.Sprite):
 
         #  some main features for hero, such as attack, hp and exp.
         self.level = 1
-        self.attack = 0
-        self.hp = 100
+        self.attack = 5
+        self.health = 100
         self.exp = 0
         self.speed = 4
         #  ends here
@@ -15,6 +15,7 @@ class Hero(pygame.sprite.Sprite):
         self.world_width = width
         self.world_height = height
         self.init_image = pygame.image.load('images/hero_stand_down.png').convert_alpha()
+        self.mask = pygame.mask.from_surface(self.init_image)
         self.up_image = pygame.image.load('images/hero_stand_up.png').convert_alpha()
         self.down_image = pygame.image.load('images/hero_stand_down.png').convert_alpha()
         self.left_image = pygame.image.load('images/hero_stand_left.png').convert_alpha()
@@ -77,3 +78,9 @@ class Hero(pygame.sprite.Sprite):
             self.rect.right += self.speed
         else:
             self.rect.right = self.world_width
+
+    def level_up(self):
+        self.level += 1
+        self.health = 100 + (self.level - 1) * 50
+        self.attack = 5 + (self.level - 1) * 2
+        self.exp = 0
