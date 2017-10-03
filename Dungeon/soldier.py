@@ -2,8 +2,9 @@ import pygame
 import time
 
 class SoldierTypeOne(pygame.sprite.Sprite):
-    def __init__(self, position, width, height):
+    def __init__(self, position, width, height, num):
         pygame.sprite.Sprite.__init__(self)
+        self.num = num
         self.speed = 2
         self.count = 0
         self.exp_carried = 50
@@ -60,8 +61,9 @@ class SoldierTypeOne(pygame.sprite.Sprite):
             self.turn = not(self.turn)
 
 class SoldierTypeTwo(pygame.sprite.Sprite):
-    def __init__(self, position, width, height):
+    def __init__(self, position, width, height,num):
         pygame.sprite.Sprite.__init__(self)
+        self.num = num
         self.speed = 2
         self.count = 0
         self.exp_carried = 50
