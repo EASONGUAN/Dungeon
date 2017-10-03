@@ -11,7 +11,7 @@ class Hero(pygame.sprite.Sprite):
         self.exp = 0
         self.speed = 4
         #  ends here
-
+        # self.explosion_image = pygame.image.load('images/hero_explosion.png').convert_alpha()
         self.world_width = width
         self.world_height = height
         self.init_image = pygame.image.load('images/hero_stand_down.png').convert_alpha()
@@ -48,6 +48,7 @@ class Hero(pygame.sprite.Sprite):
         self.active = True
 
     def moveup(self):
+
         for index in range(100):
             self.init_image = self.up_move_image[index % 2]
         if self.rect.top > 0:
