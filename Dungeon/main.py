@@ -2,7 +2,6 @@ import pygame
 import sys
 import traceback
 import hero
-import world
 import soldier
 import time
 
@@ -86,8 +85,6 @@ def main():
     hero_group = pygame.sprite.Group()
     hero_group.add(my_hero)
 
-    soldier_list = [soldier_one, soldier_two, soldier_three, soldier_four, soldier_five, soldier_six]
-
     playing = True
     movement = []
     while playing:
@@ -117,7 +114,6 @@ def main():
             pygame.draw.line(screen, black, (my_hero.rect.left, my_hero.rect.top - 5),
                              (my_hero.rect.right, my_hero.rect.top - 5), 2)
             hero_health_remains = my_hero.health / 100
-            hero_health_remains = my_hero.health / 15
             if hero_health_remains > 0.5:
                 energy_color = green
             else:
@@ -149,23 +145,6 @@ def main():
                         playing = False
                     if sol.health <= 0:
                         sol.active = False
-                             (my_hero.rect.left + my_hero.rect.width * 0.1 * hero_health_remains, my_hero.rect.top - 5), 2)
-
-        for sol in soldier_list:
-            if sol.active:
-                sol_health_remain = sol.health / 25
-                screen.blit(sol.init_image, sol.rect)
-                sol.move()
-                hero_collide = pygame.sprite.spritecollide(my_hero, soldier_list, False, pygame.sprite.collide_mask)
-                if hero_collide and delay % 3 == 0:
-                    for injured_sol in hero_collide:
-                        my_hero.health -= injured_sol.attack
-                        injured_sol.health -= my_hero.health
-                        if my_hero.health <= 0:
-                            my_hero.active = False
-                            playing = False
-                        if injured_sol.health <= 0:
-                            injured_sol.active = False
 
         print(movement)
         movement = []
@@ -178,12 +157,6 @@ def main():
         pygame.display.flip()
     screen.fill(WHITE)
     # game_over()
-        print(my_hero.level, my_hero.health, my_hero.exp)
-        clock.tick(fps)
-        pygame.display.flip()
-    screen.fill(WHITE)
-    game_over()
-
 if __name__ == '__main__':
     try:
         main()
