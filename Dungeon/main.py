@@ -35,13 +35,10 @@ black = 0, 0, 0
 green = 0, 255, 0
 red = 255, 0, 0
 
-<<<<<<< HEAD
 def image_flash(object, time):
     pass
 
 
-=======
->>>>>>> 120c9a2403d2c86b2ef452ad9d75001068297b02
 def text_objects(text, font):
     text_surface = font.render(text, True, BLACK)
     return text_surface, text_surface.get_rect()
@@ -72,7 +69,6 @@ def main():
     soldier_four = soldier.SoldierTypeTwo((90, 90), bg_size[0], bg_size[1])
     soldier_five = soldier.SoldierTypeTwo((180, 180), bg_size[0], bg_size[1])
     soldier_six = soldier.SoldierTypeTwo((300, 300), bg_size[0], bg_size[1])
-<<<<<<< HEAD
     soldier_group = pygame.sprite.Group()
     soldier_group.add(soldier_one)
     soldier_group.add(soldier_two)
@@ -90,9 +86,7 @@ def main():
     hero_group = pygame.sprite.Group()
     hero_group.add(my_hero)
 
-=======
     soldier_list = [soldier_one, soldier_two, soldier_three, soldier_four, soldier_five, soldier_six]
->>>>>>> 120c9a2403d2c86b2ef452ad9d75001068297b02
 
     playing = True
     movement = []
@@ -122,17 +116,13 @@ def main():
             screen.blit(my_hero.init_image, my_hero.rect)
             pygame.draw.line(screen, black, (my_hero.rect.left, my_hero.rect.top - 5),
                              (my_hero.rect.right, my_hero.rect.top - 5), 2)
-<<<<<<< HEAD
             hero_health_remains = my_hero.health / 100
-=======
             hero_health_remains = my_hero.health / 15
->>>>>>> 120c9a2403d2c86b2ef452ad9d75001068297b02
             if hero_health_remains > 0.5:
                 energy_color = green
             else:
                 energy_color = red
             pygame.draw.line(screen, energy_color, (my_hero.rect.left, my_hero.rect.top - 5), \
-<<<<<<< HEAD
                              (my_hero.rect.left + my_hero.rect.width * hero_health_remains, my_hero.rect.top - 5), 2)
 
         for sol in soldier_group:
@@ -159,7 +149,6 @@ def main():
                         playing = False
                     if sol.health <= 0:
                         sol.active = False
-=======
                              (my_hero.rect.left + my_hero.rect.width * 0.1 * hero_health_remains, my_hero.rect.top - 5), 2)
 
         for sol in soldier_list:
@@ -179,25 +168,21 @@ def main():
                             injured_sol.active = False
 
         print(movement)
->>>>>>> 120c9a2403d2c86b2ef452ad9d75001068297b02
         movement = []
 
         delay -= 1
         if delay <= 0:
             delay = 100
-<<<<<<< HEAD
         #print(my_hero.level, my_hero.health, my_hero.exp)
         clock.tick(fps)
         pygame.display.flip()
     screen.fill(WHITE)
     # game_over()
-=======
         print(my_hero.level, my_hero.health, my_hero.exp)
         clock.tick(fps)
         pygame.display.flip()
     screen.fill(WHITE)
     game_over()
->>>>>>> 120c9a2403d2c86b2ef452ad9d75001068297b02
 
 if __name__ == '__main__':
     try:
