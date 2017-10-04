@@ -62,12 +62,12 @@ def main():
     delay = 100
     my_hero = hero.Hero((45, 45), bg_size[0], bg_size[1])
 
-    soldier_one = soldier.SoldierTypeOne((90, 90), bg_size[0], bg_size[1])
-    soldier_two = soldier.SoldierTypeOne((180, 180), bg_size[0], bg_size[1])
-    soldier_three = soldier.SoldierTypeOne((300, 300), bg_size[0], bg_size[1])
-    soldier_four = soldier.SoldierTypeTwo((90, 90), bg_size[0], bg_size[1])
-    soldier_five = soldier.SoldierTypeTwo((180, 180), bg_size[0], bg_size[1])
-    soldier_six = soldier.SoldierTypeTwo((300, 300), bg_size[0], bg_size[1])
+    soldier_one = soldier.SoldierTypeOne((90, 90), bg_size[0], bg_size[1],1)
+    soldier_two = soldier.SoldierTypeOne((180, 180), bg_size[0], bg_size[1],2)
+    soldier_three = soldier.SoldierTypeOne((300, 300), bg_size[0], bg_size[1],3)
+    soldier_four = soldier.SoldierTypeTwo((90, 90), bg_size[0], bg_size[1],4)
+    soldier_five = soldier.SoldierTypeTwo((180, 180), bg_size[0], bg_size[1],5)
+    soldier_six = soldier.SoldierTypeTwo((300, 300), bg_size[0], bg_size[1],6)
     soldier_group = pygame.sprite.Group()
     soldier_group.add(soldier_one)
     soldier_group.add(soldier_two)
