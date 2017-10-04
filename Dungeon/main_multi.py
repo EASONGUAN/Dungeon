@@ -146,8 +146,8 @@ def main():
             hero_collide = pygame.sprite.spritecollide(sol, hero_group, False, pygame.sprite.collide_mask)
             if hero_collide:
                 if delay % 5 == 0:
-                    my_hero.health -= sol.attack
-                    sol.health -= my_hero.attack
+                    my_hero.health -= sol.attack/10
+                    sol.health -= my_hero.attack/10
                 if my_hero.health <= 0:
                     my_hero.active = False
                     playing = False
@@ -157,11 +157,12 @@ def main():
                 movement.append("H")
 
 
-
         # This is to tell the other side to move their soldier
         movement.append("M")
         data = pickle.dumps(movement)
         the_server.send(data)
+
+        print(movement)
         movement = []
 
 
@@ -185,8 +186,8 @@ def main():
             if isinstance(move, int):
                 for sol in soldier_group:
                     if sol.num == move:
-                        other_hero.health -= sol.attack
-                        sol.health -= my_hero.attack
+                        other_hero.health -= sol.attack / 10
+                        sol.health -= my_hero.attack / 10
                     if other_hero.health <= 0:
                         other_hero.active = False
                         playing = False

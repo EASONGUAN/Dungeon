@@ -62,12 +62,12 @@ def main():
     delay = 100
     my_hero = hero.Hero((45, 45), bg_size[0], bg_size[1])
 
-    soldier_one = soldier.SoldierTypeOne((90, 90), bg_size[0], bg_size[1],1)
-    soldier_two = soldier.SoldierTypeOne((180, 180), bg_size[0], bg_size[1],2)
-    soldier_three = soldier.SoldierTypeOne((300, 300), bg_size[0], bg_size[1],3)
-    soldier_four = soldier.SoldierTypeTwo((90, 90), bg_size[0], bg_size[1],4)
-    soldier_five = soldier.SoldierTypeTwo((180, 180), bg_size[0], bg_size[1],5)
-    soldier_six = soldier.SoldierTypeTwo((300, 300), bg_size[0], bg_size[1],6)
+    soldier_one = soldier.SoldierTypeOne((90, 90), bg_size[0], bg_size[1], 1)
+    soldier_two = soldier.SoldierTypeOne((180, 180), bg_size[0], bg_size[1], 2)
+    soldier_three = soldier.SoldierTypeOne((300, 300), bg_size[0], bg_size[1], 3)
+    soldier_four = soldier.SoldierTypeTwo((90, 90), bg_size[0], bg_size[1], 4)
+    soldier_five = soldier.SoldierTypeTwo((180, 180), bg_size[0], bg_size[1], 5)
+    soldier_six = soldier.SoldierTypeTwo((300, 300), bg_size[0], bg_size[1], 6)
     soldier_group = pygame.sprite.Group()
     soldier_group.add(soldier_one)
     soldier_group.add(soldier_two)
@@ -118,7 +118,7 @@ def main():
                 energy_color = green
             else:
                 energy_color = red
-            pygame.draw.line(screen, energy_color, (my_hero.rect.left, my_hero.rect.top - 5), \
+            pygame.draw.line(screen, energy_color, (my_hero.rect.left, my_hero.rect.top - 5),
                              (my_hero.rect.left + my_hero.rect.width * hero_health_remains, my_hero.rect.top - 5), 2)
 
         for sol in soldier_group:
@@ -132,7 +132,7 @@ def main():
                     sol_color = green
                 else:
                     sol_color = red
-                pygame.draw.line(screen, sol_color, (sol.rect.left, sol.rect.top - 5), \
+                pygame.draw.line(screen, sol_color, (sol.rect.left, sol.rect.top - 5),
                                  (sol.rect.left + sol.rect.width * sol_health_remains,
                                   sol.rect.top - 5), 2)
                 hero_collide = pygame.sprite.spritecollide(sol, hero_group, False, pygame.sprite.collide_mask)
@@ -145,6 +145,7 @@ def main():
                         playing = False
                     if sol.health <= 0:
                         sol.active = False
+                    movement.append(sol.num)
 
         print(movement)
         movement = []

@@ -6,7 +6,7 @@ class Hero(pygame.sprite.Sprite):
 
         #  some main features for hero, such as attack, hp and exp.
         self.level = 1
-        self.attack = 5
+        self.attack = 2
         self.health = 100
         self.exp = 0
         self.speed = 4
