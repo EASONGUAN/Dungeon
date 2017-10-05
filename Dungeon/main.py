@@ -4,6 +4,7 @@ import traceback
 import hero
 import soldier
 import time
+import Trees
 
 from pygame.locals import *
 from random import *
@@ -84,6 +85,12 @@ def main():
     soldier_survive_group.add(soldier_six)
     hero_group = pygame.sprite.Group()
     hero_group.add(my_hero)
+    tree_one = Trees.TreeTypeOne(75, 125)
+    root_one = Trees.RootTypeOne(75, 125)
+    stabale = pygame.sprite.Group()
+    stabale.add(tree_one)
+    blocks = pygame.sprite.Group()
+    blocks.add(root_one)
 
     playing = True
     movement = []
@@ -96,18 +103,34 @@ def main():
                 sys.exit(0)
 
         key_pressed = pygame.key.get_pressed()
-        if key_pressed[K_UP] or key_pressed[K_w]:
+        can_move = True
+        collide_root =  pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask)
+        if collide_root:
+            can_move = False
+        if can_move and key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
             movement.append("U")
-        if key_pressed[K_DOWN] or key_pressed[K_s]:
+        elif not can_move:
+            my_hero.movedown()
+            can_move = True
+        if can_move and key_pressed[K_DOWN] or key_pressed[K_s]:
             my_hero.movedown()
             movement.append("D")
-        if key_pressed[K_LEFT] or key_pressed[K_a]:
+        elif not can_move:
+            my_hero.moveup()
+            can_move = True
+        if can_move and key_pressed[K_LEFT] or key_pressed[K_a]:
             my_hero.moveleft()
             movement.append("L")
-        if key_pressed[K_RIGHT] or key_pressed[K_d]:
+        elif not can_move:
+            my_hero.moveright()
+            can_move = True
+        if can_move and key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
             movement.append("R")
+        elif not can_move:
+            my_hero.moveleft()
+            can_move = True
         screen.blit(background, (0, 0))
         if my_hero.active:
             screen.blit(my_hero.init_image, my_hero.rect)
@@ -146,7 +169,8 @@ def main():
                     if sol.health <= 0:
                         sol.active = False
                     movement.append(sol.num)
-
+        for stabale_object in stabale:
+            screen.blit(stabale_object.init_image, stabale_object.rect)
         print(movement)
         movement = []
 
