@@ -138,8 +138,6 @@ def main():
         else:
             movement.append("S")
 
-
-
         # Collision =============================================
 
         for sol in soldier_group:
@@ -242,6 +240,7 @@ def main():
                 pygame.draw.line(screen, sol_color, (sol.rect.left, sol.rect.top - 5),
                                      (sol.rect.left + sol.rect.width * sol_health_remains,
                                       sol.rect.top - 5), 2)
+
                 screen.blit(sol.init_image, sol.rect)
 
 

@@ -107,30 +107,34 @@ def main():
         collide_root =  pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask)
         if collide_root:
             can_move = False
-        if can_move and key_pressed[K_UP] or key_pressed[K_w]:
-            my_hero.moveup()
-            movement.append("U")
-        elif not can_move:
-            my_hero.movedown()
-            can_move = True
-        if can_move and key_pressed[K_DOWN] or key_pressed[K_s]:
-            my_hero.movedown()
-            movement.append("D")
-        elif not can_move:
-            my_hero.moveup()
-            can_move = True
-        if can_move and key_pressed[K_LEFT] or key_pressed[K_a]:
-            my_hero.moveleft()
-            movement.append("L")
-        elif not can_move:
-            my_hero.moveright()
-            can_move = True
-        if can_move and key_pressed[K_RIGHT] or key_pressed[K_d]:
-            my_hero.moveright()
-            movement.append("R")
-        elif not can_move:
-            my_hero.moveleft()
-            can_move = True
+        if key_pressed[K_UP] or key_pressed[K_w]:
+            if can_move:
+                my_hero.moveup()
+                movement.append("U")
+            elif not can_move:
+                my_hero.movedown()
+                can_move = True
+        if key_pressed[K_DOWN] or key_pressed[K_s]:
+            if can_move:
+                my_hero.movedown()
+                movement.append("D")
+            elif not can_move:
+                my_hero.moveup()
+                can_move = True
+        if key_pressed[K_LEFT] or key_pressed[K_a]:
+            if can_move:
+                my_hero.moveleft()
+                movement.append("L")
+            elif not can_move:
+                my_hero.moveright()
+                can_move = True
+        if key_pressed[K_RIGHT] or key_pressed[K_d]:
+            if can_move:
+                my_hero.moveright()
+                movement.append("R")
+            elif not can_move:
+                my_hero.moveleft()
+                can_move = True
         screen.blit(background, (0, 0))
         if my_hero.active:
             screen.blit(my_hero.init_image, my_hero.rect)
