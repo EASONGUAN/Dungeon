@@ -7,6 +7,7 @@ import soldier
 import socket
 import time
 import pickle
+import Trees
 
 from pygame.locals import *
 from random import *
@@ -91,6 +92,13 @@ def main():
     soldier_group.add(soldier_three)
     #soldier_list = [soldier_one, soldier_two, soldier_three]
 
+    tree_one = Trees.TreeTypeOne(75, 125)
+    root_one = Trees.RootTypeOne(75, 125)
+    stabale = pygame.sprite.Group()
+    stabale.add(tree_one)
+    blocks = pygame.sprite.Group()
+    blocks.add(root_one)
+
     hero_group = pygame.sprite.Group()
     hero_group.add(my_hero)
 
@@ -125,16 +133,32 @@ def main():
         key_pressed = pygame.key.get_pressed()
         if key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
-            movement.append("U")
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
+                my_hero.movedown()
+            else:
+                movement.append("U")
+
         if key_pressed[K_DOWN] or key_pressed[K_s]:
             my_hero.movedown()
-            movement.append("D")
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
+                my_hero.moveup()
+            else:
+                movement.append("D")
+
         if key_pressed[K_LEFT] or key_pressed[K_a]:
             my_hero.moveleft()
-            movement.append("L")
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
+                my_hero.moveright()
+            else:
+                movement.append("L")
+
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
-            movement.append("R")
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
+                my_hero.moveleft()
+            else:
+                movement.append("R")
+
         else:
             movement.append("S")
 
@@ -242,6 +266,9 @@ def main():
                                       sol.rect.top - 5), 2)
 
                 screen.blit(sol.init_image, sol.rect)
+
+        for stabale_object in stabale:
+            screen.blit(stabale_object.init_image, stabale_object.rect)
 
 
         clock.tick(fps)

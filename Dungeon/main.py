@@ -104,37 +104,38 @@ def main():
 
         key_pressed = pygame.key.get_pressed()
         can_move = True
+        #might not be used
         collide_root =  pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask)
-        if collide_root:
-            can_move = False
+
         if key_pressed[K_UP] or key_pressed[K_w]:
-            if can_move:
-                my_hero.moveup()
+            my_hero.moveup()
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
+                my_hero.movedown()
+            else:
                 movement.append("U")
-            elif not can_move:
-                my_hero.movedown()
-                can_move = True
+
         if key_pressed[K_DOWN] or key_pressed[K_s]:
-            if can_move:
-                my_hero.movedown()
-                movement.append("D")
-            elif not can_move:
+            my_hero.movedown()
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
                 my_hero.moveup()
-                can_move = True
+            else:
+                movement.append("D")
+
         if key_pressed[K_LEFT] or key_pressed[K_a]:
-            if can_move:
-                my_hero.moveleft()
+            my_hero.moveleft()
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
+                my_hero.moveright()
+            else:
                 movement.append("L")
-            elif not can_move:
-                my_hero.moveright()
-                can_move = True
+
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
-            if can_move:
-                my_hero.moveright()
-                movement.append("R")
-            elif not can_move:
+            my_hero.moveright()
+            if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
                 my_hero.moveleft()
-                can_move = True
+            else:
+                movement.append("R")
+
+
         screen.blit(background, (0, 0))
         if my_hero.active:
             screen.blit(my_hero.init_image, my_hero.rect)
