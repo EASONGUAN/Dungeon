@@ -94,11 +94,14 @@ def main():
 
     tree_one = Trees.TreeTypeOne(75, 125)
     root_one = Trees.RootTypeOne(75, 125)
+    tree_two = Trees.TreeTypeTwo(300, 150)
+    root_two = Trees.RootTypeTwo(300, 150)
     stabale = pygame.sprite.Group()
     stabale.add(tree_one)
+    stabale.add(tree_two)
     blocks = pygame.sprite.Group()
     blocks.add(root_one)
-
+    blocks.add(root_two)
     hero_group = pygame.sprite.Group()
     hero_group.add(my_hero)
 
