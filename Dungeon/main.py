@@ -203,6 +203,9 @@ def main():
                     if sol.health <= 0:
                         sol.active = False
                     movement.append(sol.num)
+            else:
+                soldier_group.remove(sol)
+
         for stabale_object in stabale:
             screen.blit(stabale_object.init_image, stabale_object.rect)
         movement = []
