@@ -7,6 +7,7 @@ class magicball(pygame.sprite.Sprite):
     def __init__(self, position, direction):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('images/magicball.png').convert_alpha()
+        self.other_image = pygame.image.load('images/jack.png').convert_alpha()
         self.active = True
         self.speed = 6
         self.direction = ''

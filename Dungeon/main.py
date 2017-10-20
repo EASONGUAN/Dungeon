@@ -144,7 +144,6 @@ def main():
                 my_hero.moveright()
             else:
                 movement.append("L")
-
         if key_pressed[K_RIGHT] or key_pressed[K_d]:
             my_hero.moveright()
             if pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask):
@@ -209,12 +208,9 @@ def main():
         for stabale_object in stabale:
             screen.blit(stabale_object.init_image, stabale_object.rect)
         movement = []
-        if delay % 3:
-            print(allmagicattack)
         delay -= 1
         if delay <= 0:
             delay = 100
-        #print(my_hero.level, my_hero.health, my_hero.exp)
         clock.tick(fps)
         pygame.display.flip()
     screen.fill(WHITE)
