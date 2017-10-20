@@ -59,10 +59,10 @@ class Hero(pygame.sprite.Sprite):
     def movedown(self):
         for index in range(100):
             self.init_image = self.down_move_image[index % 2]
-        if self.rect.bottom < self.world_height - 60:
+        if self.rect.bottom < self.world_height:
             self.rect.bottom += self.speed
         else:
-            self.rect.bottom = self.world_height - 60
+            self.rect.bottom = self.world_height
 
     def moveleft(self):
         for index in range(100):
@@ -85,3 +85,4 @@ class Hero(pygame.sprite.Sprite):
         self.health = 100 + (self.level - 1) * 50
         self.attack = 5 + (self.level - 1) * 2
         self.exp = 0
+

@@ -10,7 +10,7 @@ class magicball(pygame.sprite.Sprite):
         self.active = True
         self.speed = 6
         self.direction = ''
-        self.damage = 10
+        self.damage = 2.5
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
         self.mask = pygame.mask.from_surface(self.image)

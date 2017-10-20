@@ -4,6 +4,7 @@ import traceback
 import hero
 import soldier
 import time
+import MagicAttack
 import Trees
 
 from pygame.locals import *
@@ -94,7 +95,9 @@ def main():
 
     playing = True
     movement = []
+    allmagicattack = []
     while playing:
+        key_pressed = pygame.key.get_pressed()
         fps = 60
         clock = pygame.time.Clock()
         for event in pygame.event.get():
@@ -102,10 +105,24 @@ def main():
                 pygame.quit()
                 sys.exit(0)
 
-        key_pressed = pygame.key.get_pressed()
+        # generate magicattack midtop, midleft, midbottom, midright starting point.
+        if key_pressed[K_SPACE]:
+            if my_hero.init_image in my_hero.up_move_image:
+                new_magicball = MagicAttack.magicball(my_hero.rect.midtop, 'U')
+                allmagicattack.append(new_magicball)
+            elif my_hero.init_image in my_hero.down_move_image:
+                new_magicball = MagicAttack.magicball(my_hero.rect.midbottom, 'D')
+                allmagicattack.append(new_magicball)
+            elif my_hero.init_image in my_hero.left_move_image:
+                new_magicball = MagicAttack.magicball(my_hero.rect.midleft, 'L')
+                allmagicattack.append(new_magicball)
+            elif my_hero.init_image in my_hero.right_move_image:
+                new_magicball = MagicAttack.magicball(my_hero.rect.midright, 'R')
+                allmagicattack.append(new_magicball)
         can_move = True
-        #might not be used
-        collide_root =  pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask)
+
+        # might not be used
+        collide_root = pygame.sprite.spritecollide(my_hero, blocks, False, pygame.sprite.collide_mask)
 
         if key_pressed[K_UP] or key_pressed[K_w]:
             my_hero.moveup()
@@ -134,9 +151,21 @@ def main():
                 my_hero.moveleft()
             else:
                 movement.append("R")
-
-
         screen.blit(background, (0, 0))
+        for magic in allmagicattack:
+            if pygame.sprite.spritecollide(magic, blocks, False, pygame.sprite.collide_mask):
+                magic.active = False
+            if magic.active:
+                screen.blit(magic.image, magic.rect)
+                magic.move()
+                magic_hit = pygame.sprite.spritecollide(magic, soldier_group, False, pygame.sprite.collide_mask)
+                if magic_hit:
+                    magic.active = False
+                    for e in magic_hit:
+                        if e.active:
+                            e.health -= magic.damage
+                        if e.health <= 0:
+                            e.active = False
         if my_hero.active:
             screen.blit(my_hero.init_image, my_hero.rect)
             pygame.draw.line(screen, black, (my_hero.rect.left, my_hero.rect.top - 5),
@@ -176,9 +205,9 @@ def main():
                     movement.append(sol.num)
         for stabale_object in stabale:
             screen.blit(stabale_object.init_image, stabale_object.rect)
-        print(movement)
         movement = []
-
+        if delay % 3:
+            print(allmagicattack)
         delay -= 1
         if delay <= 0:
             delay = 100
