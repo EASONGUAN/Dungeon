@@ -93,15 +93,16 @@ def main():
     #soldier_list = [soldier_one, soldier_two, soldier_three]
 
     tree_one = Trees.TreeTypeOne(75, 125)
-    root_one = Trees.RootTypeOne(75, 125)
     tree_two = Trees.TreeTypeTwo(300, 150)
-    root_two = Trees.RootTypeTwo(300, 150)
-    stabale = pygame.sprite.Group()
-    stabale.add(tree_one)
-    stabale.add(tree_two)
+    stone_one = Trees.StoneTypeOne(200, 300)
+    stable = pygame.sprite.Group()
+    stable.add(tree_one)
+    stable.add(tree_two)
+    stable.add(stone_one)
     blocks = pygame.sprite.Group()
-    blocks.add(root_one)
-    blocks.add(root_two)
+    blocks.add(tree_one.root)
+    blocks.add(tree_two.root)
+    blocks.add(stone_one.root)
     hero_group = pygame.sprite.Group()
     hero_group.add(my_hero)
 
@@ -270,7 +271,7 @@ def main():
 
                 screen.blit(sol.init_image, sol.rect)
 
-        for stabale_object in stabale:
+        for stabale_object in stable:
             screen.blit(stabale_object.init_image, stabale_object.rect)
 
 

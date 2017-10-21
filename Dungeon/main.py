@@ -87,11 +87,16 @@ def main():
     hero_group = pygame.sprite.Group()
     hero_group.add(my_hero)
     tree_one = Trees.TreeTypeOne(75, 125)
-    root_one = Trees.RootTypeOne(75, 125)
-    stabale = pygame.sprite.Group()
-    stabale.add(tree_one)
+    tree_two = Trees.TreeTypeTwo(300, 125)
+    stone_one = Trees.StoneTypeOne(200, 300)
+    stable = pygame.sprite.Group()
+    stable.add(tree_one)
+    stable.add(tree_two)
+    stable.add(stone_one)
     blocks = pygame.sprite.Group()
-    blocks.add(root_one)
+    blocks.add(tree_one.root)
+    blocks.add(tree_two.root)
+    blocks.add(stone_one.root)
 
     playing = True
     movement = []
@@ -205,7 +210,7 @@ def main():
             else:
                 soldier_group.remove(sol)
 
-        for stabale_object in stabale:
+        for stabale_object in stable:
             screen.blit(stabale_object.init_image, stabale_object.rect)
         movement = []
         delay -= 1
